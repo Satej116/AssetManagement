@@ -2,16 +2,17 @@
 {
     public class User
     {
-        public int UserId { get; set; }             // PK
-        public int EmployeeId { get; set; }         // FK → Employees
-        public string Username { get; set; }        // Unique username or email
-        public string PasswordHash { get; set; }    // Hashed password
-        public int RoleId { get; set; }             // FK → RoleMaster
-        public DateTime CreatedAt { get; set; } = DateTime.Now;
+        public int UserId { get; set; }
+        public int EmployeeId { get; set; }
+        public string Username { get; set; } = string.Empty;
+        public string PasswordHash { get; set; } = string.Empty;
+        public string HashKey { get; set; } = string.Empty;
+        public int RoleId { get; set; }
+        public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
         public bool IsActive { get; set; } = true;
 
-        // Navigation Properties
-        public Employee? Employee { get; set; }
-        public RoleMaster? Role { get; set; }
+        public Employee? Employee { get; set; } = null!;
+        public RoleMaster? Role { get; set; } = null!;
+
     }
 }

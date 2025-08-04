@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AssetManagement.Migrations
 {
     [DbContext(typeof(AssetManagementDbContext))]
-    [Migration("20250801102448_init")]
-    partial class init
+    [Migration("20250803233921_hashkey")]
+    partial class hashkey
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -390,6 +390,10 @@ namespace AssetManagement.Migrations
                     b.Property<int>("EmployeeId")
                         .HasColumnType("int");
 
+                    b.Property<string>("HashKey")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<bool>("IsActive")
                         .HasColumnType("bit");
 
@@ -539,7 +543,7 @@ namespace AssetManagement.Migrations
                     b.HasOne("AssetManagement.Models.RoleMaster", "Role")
                         .WithMany("Users")
                         .HasForeignKey("RoleId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Employee");

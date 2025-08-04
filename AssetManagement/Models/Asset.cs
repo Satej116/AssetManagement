@@ -15,11 +15,10 @@
         public DateTime UpdatedAt { get; set; }
         public bool IsDeleted { get; set; } = false;
 
-        // Navigation
         public AssetCategory Category { get; set; }
         public AssetStatusMaster Status { get; set; }
-        public ICollection<AssetAllocation> AssetAllocations { get; set; }
-        public ICollection<ServiceRequest> ServiceRequests { get; set; }
-        public ICollection<AuditRequest> AuditRequests { get; set; }
+        public ICollection<AssetAllocation?> AssetAllocations { get; set; }
+        public ICollection<ServiceRequest?> ServiceRequests { get; set; }
+        public ICollection<AuditRequest?> AuditRequests { get; set; }
     }
 }

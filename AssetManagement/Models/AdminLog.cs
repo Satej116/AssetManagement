@@ -9,7 +9,6 @@
         public string Description { get; set; } = string.Empty;
         public DateTime Timestamp { get; set; }
 
-        // Navigation
         public Employee Admin { get; set; }
     }
 }

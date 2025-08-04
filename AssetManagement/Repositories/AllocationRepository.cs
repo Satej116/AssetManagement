@@ -6,41 +6,45 @@ using Microsoft.EntityFrameworkCore;
 
 namespace AssetManagement.Repositories
 {
-    public class AssetRepository : RepositoryDb<int, Asset>, IAssetRepository
+    public class AllocationRepository : RepositoryDb<(int, int), AssetAllocation>, IAllocationRepository
     {
-        public AssetRepository(AssetManagementDbContext context) : base(context) { }
+        public AllocationRepository(AssetManagementDbContext context) : base(context) { }
 
-        // Extra methods
-        public async Task<IEnumerable<Asset>> GetAssetsByCategoryAsync(int categoryId)
+        public async Task<AssetAllocation?> GetAllocationAsync(int assetId, int employeeId)
         {
             return await _dbSet
-                         .Where(a => a.CategoryId == categoryId)
-                         .Include(a => a.Status)
+                         .Include(a => a.Asset)
+                         .Include(a => a.Employee)
+                         .FirstOrDefaultAsync(a => a.AssetId == assetId && a.EmployeeId == employeeId);
+        }
+
+        public async Task<IEnumerable<AssetAllocation>> GetAllocationsByEmployeeAsync(int employeeId)
+        {
+            return await _dbSet
+                         .Where(a => a.EmployeeId == employeeId)
+                         .Include(a => a.Asset)
                          .ToListAsync();
         }
 
-        public async Task<IEnumerable<Asset>> GetAssetsByStatusAsync(int statusId)
+        public async Task<IEnumerable<AssetAllocation>> GetAllocationsByAssetAsync(int assetId)
         {
             return await _dbSet
-                         .Where(a => a.StatusId == statusId)
-                         .Include(a => a.Category)
+                         .Where(a => a.AssetId == assetId)
+                         .Include(a => a.Employee)
                          .ToListAsync();
         }
 
-        // Override for navigation
-        public override async Task<Asset?> GetByIdAsync(int assetId)
+        // Override methods for generic repository
+        public override async Task<AssetAllocation?> GetByIdAsync((int, int) key)
         {
-            return await _dbSet
-                         .Include(a => a.Category)
-                         .Include(a => a.Status)
-                         .FirstOrDefaultAsync(a => a.AssetId == assetId);
+            return await GetAllocationAsync(key.Item1, key.Item2);
         }
 
-        public override async Task<IEnumerable<Asset>> GetAllAsync()
+        public override async Task<IEnumerable<AssetAllocation>> GetAllAsync()
         {
             return await _dbSet
-                         .Include(a => a.Category)
-                         .Include(a => a.Status)
+                         .Include(a => a.Asset)
+                         .Include(a => a.Employee)
                          .ToListAsync();
         }
     }

@@ -10,8 +10,7 @@
         public string Notes { get; set; } = string.Empty;
         public bool IsActive { get; set; } = true;
 
-        // Navigation
-        public Asset Asset { get; set; }
-        public Employee Employee { get; set; }
+        public Asset? Asset { get; set; }
+        public Employee? Employee { get; set; }
     }
 }

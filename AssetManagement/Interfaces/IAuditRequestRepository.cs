@@ -2,9 +2,7 @@
 
 namespace AssetManagement.Interfaces
 {
-    public interface IAuditRequestRepository : IRepository<int, AuditRequest>
+    public interface IAuditRequestRepository
     {
-        Task<IEnumerable<AuditRequest>> GetAuditRequestsByEmployeeAsync(int employeeId);
-        Task<IEnumerable<AuditRequest>> GetAuditRequestsByAssetAsync(int assetId);
     }
 }

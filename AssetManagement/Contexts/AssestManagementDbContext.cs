@@ -12,7 +12,7 @@ namespace AssetManagement.Contexts
         {
         }
 
-        // DbSets = Tables
+        // Tables
         public DbSet<User> Users { get; set; }
         public DbSet<Employee> Employees { get; set; }
         public DbSet<RoleMaster> RoleMasters { get; set; }
@@ -34,73 +34,74 @@ namespace AssetManagement.Contexts
             modelBuilder.Entity<AssetAllocation>()
                 .HasKey(a => new { a.AssetId, a.EmployeeId });
 
-            // User ↔ Employee (1:1)
+            // User and Employee (1:1)
             modelBuilder.Entity<User>()
                 .HasOne(u => u.Employee)
                 .WithOne(e => e.User)
                 .HasForeignKey<User>(u => u.EmployeeId);
 
-            // User ↔ Role (Many-to-1)
+            // User and Role (Many-to-1)
             modelBuilder.Entity<User>()
                 .HasOne(u => u.Role)
                 .WithMany(r => r.Users)
-                .HasForeignKey(u => u.RoleId);
+                .HasForeignKey(u => u.RoleId)
+                .OnDelete(DeleteBehavior.Restrict);
 
-            // Employee ↔ Role (Many-to-1)
+            // Employee and Role (Many-to-1)
             modelBuilder.Entity<Employee>()
                 .HasOne(e => e.Role)
                 .WithMany(r => r.Employees)
                 .HasForeignKey(e => e.RoleId);
 
-            // Asset ↔ Category (Many-to-1)
+            // Asset and Category (Many-to-1)
             modelBuilder.Entity<Asset>()
                 .HasOne(a => a.Category)
                 .WithMany(c => c.Assets)
                 .HasForeignKey(a => a.CategoryId);
 
-            // Asset ↔ Status (Many-to-1)
+            // Asset and Status (Many-to-1)
             modelBuilder.Entity<Asset>()
                 .HasOne(a => a.Status)
                 .WithMany(s => s.Assets)
                 .HasForeignKey(a => a.StatusId);
 
-            // ServiceRequest ↔ Asset (Many-to-1)
+            // ServiceRequest and Asset (Many-to-1)
             modelBuilder.Entity<ServiceRequest>()
                 .HasOne(sr => sr.Asset)
                 .WithMany(a => a.ServiceRequests)
                 .HasForeignKey(sr => sr.AssetId);
 
-            // ServiceRequest ↔ Employee (Many-to-1)
+            // ServiceRequest and Employee (Many-to-1)
             modelBuilder.Entity<ServiceRequest>()
                 .HasOne(sr => sr.Employee)
                 .WithMany(e => e.ServiceRequests)
                 .HasForeignKey(sr => sr.EmployeeId);
 
-            // ServiceRequest ↔ Status (Many-to-1)
+            // ServiceRequest and Status (Many-to-1)
             modelBuilder.Entity<ServiceRequest>()
                 .HasOne(sr => sr.Status)
                 .WithMany(ss => ss.ServiceRequests)
                 .HasForeignKey(sr => sr.StatusId);
 
-            // AuditRequest ↔ Asset (Many-to-1)
+            // AuditRequest and Asset (Many-to-1)
             modelBuilder.Entity<AuditRequest>()
                 .HasOne(ar => ar.Asset)
                 .WithMany(a => a.AuditRequests)
                 .HasForeignKey(ar => ar.AssetId);
 
-            // AuditRequest ↔ Employee (Many-to-1)
+            // AuditRequest and Employee (Many-to-1)
             modelBuilder.Entity<AuditRequest>()
                 .HasOne(ar => ar.Employee)
                 .WithMany(e => e.AuditRequests)
                 .HasForeignKey(ar => ar.EmployeeId);
 
-            // AuditRequest ↔ Status (Many-to-1)
+            // AuditRequest and Status (Many-to-1)
             modelBuilder.Entity<AuditRequest>()
                 .HasOne(ar => ar.Status)
                 .WithMany(s => s.AuditRequests)
                 .HasForeignKey(ar => ar.StatusId);
 
-            // AdminLog ↔ Employee (Many-to-1)
+            // AdminLog and Employee (Many-to-1)
             modelBuilder.Entity<AdminLog>()
                 .HasOne(al => al.Admin)
                 .WithMany(e => e.AdminLogs)

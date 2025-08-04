@@ -9,6 +9,6 @@ namespace AssetManagement.Models
         public string StatusName { get; set; } = string.Empty;   // Pending, InProgress, Resolved, Rejected
 
         // Navigation
-        public ICollection<ServiceRequest> ServiceRequests { get; set; }
+        public ICollection<ServiceRequest?> ServiceRequests { get; set; }
     }
 }

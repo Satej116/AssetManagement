@@ -5,14 +5,12 @@ using Microsoft.EntityFrameworkCore;
 
 namespace AssetManagement.Repositories.DB
 {
-    public class UserRepositoryDb
-         : RepositoryDb<int, User>, IUserRepository
+    public class UserRepositoryDb : RepositoryDb<int, User>, IUserRepository
     {
         public UserRepositoryDb(AssetManagementDbContext context) : base(context)
         {
         }
 
-        // Override generic GetByIdAsync with includes
         public override async Task<User?> GetByIdAsync(int userId)
         {
             return await _dbSet
@@ -21,7 +19,6 @@ namespace AssetManagement.Repositories.DB
                          .FirstOrDefaultAsync(u => u.UserId == userId);
         }
 
-        // IUserRepository specific methods
         public async Task<User?> GetUserByIdAsync(int userId)
         {
             return await GetByIdAsync(userId);

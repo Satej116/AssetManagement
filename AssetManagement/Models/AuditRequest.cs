@@ -10,9 +10,8 @@
         public string Remarks { get; set; } = string.Empty;
         public DateTime? VerifiedDate { get; set; }
 
-        // Navigation
-        public Asset Asset { get; set; }
-        public Employee Employee { get; set; }
-        public AuditStatusMaster Status { get; set; }
+        public Asset? Asset { get; set; }
+        public Employee? Employee { get; set; }
+        public AuditStatusMaster? Status { get; set; }
     }
 }

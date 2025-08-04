@@ -1,11 +1,11 @@
 ﻿using AssetManagement.Models;
+using AssetManagement.Models.DTOs.Auth;
 
 namespace AssetManagement.Interfaces
 {
     public interface IAuthenticate
     {
-        Task<User?> RegisterAsync(User user, string password);
-        Task<User?> LoginAsync(string username, string password);
-        Task<bool> UserExistsAsync(string username);
+        Task<RegisterResponseDTO> Register(RegisterRequestDTO request);
+        Task<LoginResponseDTO> Login(LoginRequestDTO request);
     }
 }

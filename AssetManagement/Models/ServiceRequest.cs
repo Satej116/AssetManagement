@@ -12,8 +12,8 @@
         public string AdminRemarks { get; set; } = string.Empty;
         public DateTime UpdatedAt { get; set; }
 
-        public Asset Asset { get; set; }
-        public Employee Employee { get; set; }
-        public ServiceStatusMaster Status { get; set; }
+        public Asset? Asset { get; set; }
+        public Employee? Employee { get; set; }
+        public ServiceStatusMaster? Status { get; set; }
     }
 }

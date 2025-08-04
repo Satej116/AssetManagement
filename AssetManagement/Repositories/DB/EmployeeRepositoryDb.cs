@@ -5,14 +5,12 @@ using Microsoft.EntityFrameworkCore;
 
 namespace AssetManagement.Repositories.DB
 {
-    public class EmployeeRepositoryDb
-        : RepositoryDb<int, Employee>, IEmployeeRepository
+    public class EmployeeRepositoryDb : RepositoryDb<int, Employee>, IEmployeeRepository
     {
         public EmployeeRepositoryDb(AssetManagementDbContext context) : base(context)
         {
         }
 
-        // Override generic GetByIdAsync with full include
         public override async Task<Employee?> GetByIdAsync(int employeeId)
         {
             return await _dbSet
@@ -20,7 +18,6 @@ namespace AssetManagement.Repositories.DB
                          .FirstOrDefaultAsync(e => e.EmployeeId == employeeId);
         }
 
-        // IEmployeeRepository methods
         public async Task<Employee?> GetEmployeeByIdAsync(int employeeId)
         {
             return await GetByIdAsync(employeeId);

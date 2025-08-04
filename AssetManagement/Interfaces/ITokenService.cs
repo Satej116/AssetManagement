@@ -1,9 +1,10 @@
 ﻿using AssetManagement.Models;
+using AssetManagement.Models.DTOs.Auth;
 
 namespace AssetManagement.Interfaces
 {
     public interface ITokenService
     {
-        string GenerateToken(User user);
+        Task<string> GenerateToken(TokenUserDTO user);
     }
 }

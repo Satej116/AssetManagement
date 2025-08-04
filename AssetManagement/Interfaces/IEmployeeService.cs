@@ -1,13 +1,10 @@
 ﻿using AssetManagement.Models;
+using AssetManagement.Models.DTOs;
 
 namespace AssetManagement.Interfaces
 {
-    public interface IEmployeeService
+    public interface IEmployeeService : IRepository<int, Employee>
     {
-        Task<Employee?> GetEmployeeByIdAsync(int employeeId);
-        Task<IEnumerable<Employee>> GetAllEmployeesAsync();
-        Task<Employee> AddEmployeeAsync(Employee employee);
-        Task<Employee> UpdateEmployeeAsync(Employee employee);
-        Task<bool> DeleteEmployeeAsync(int employeeId);
+
     }
 }

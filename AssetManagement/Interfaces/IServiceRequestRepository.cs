@@ -2,10 +2,9 @@
 
 namespace AssetManagement.Interfaces
 {
-    public interface IServiceRequestRepository : IRepository<int, ServiceRequest>
+    public interface IServiceRequestRepository
     {
-        Task<IEnumerable<ServiceRequest>> GetServiceRequestsByEmployeeAsync(int employeeId);
-        Task<IEnumerable<ServiceRequest>> GetServiceRequestsByAssetAsync(int assetId);
+      
     }
 
 }

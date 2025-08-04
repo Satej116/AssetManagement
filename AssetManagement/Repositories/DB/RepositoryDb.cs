@@ -44,13 +44,11 @@ namespace AssetManagement.Repositories.DB
             return entity;
         }
 
-        // Virtual so we can override to add navigation properties
         public virtual async Task<T?> GetByIdAsync(K key)
         {
             return await _dbSet.FindAsync(key);
         }
 
-        // Virtual so we can override for eager loading
         public virtual async Task<IEnumerable<T>> GetAllAsync()
         {
             return await _dbSet.ToListAsync();

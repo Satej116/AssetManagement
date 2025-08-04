@@ -13,7 +13,6 @@ namespace AssetManagement.Repositories
         {
         }
 
-        // Override the generic GetByIdAsync to include navigation properties
         public override async Task<ServiceRequest?> GetByIdAsync(int requestId)
         {
             return await _dbSet
@@ -23,7 +22,6 @@ namespace AssetManagement.Repositories
                          .FirstOrDefaultAsync(sr => sr.ServiceRequestId == requestId);
         }
 
-        // Custom repository methods
         public async Task<ServiceRequest?> GetServiceRequestByIdAsync(int requestId)
         {
             return await GetByIdAsync(requestId);

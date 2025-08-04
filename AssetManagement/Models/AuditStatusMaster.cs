@@ -8,6 +8,6 @@ namespace AssetManagement.Models
         public string StatusName { get; set; } = string.Empty;  // Pending, Verified, Rejected
 
         // Navigation
-        public ICollection<AuditRequest> AuditRequests { get; set; }
+        public ICollection<AuditRequest?> AuditRequests { get; set; }
     }
 }

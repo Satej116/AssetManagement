@@ -296,7 +296,7 @@ namespace AssetManagement.Migrations
                         column: x => x.RoleId,
                         principalTable: "RoleMasters",
                         principalColumn: "RoleId",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateIndex(
